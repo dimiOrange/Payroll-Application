@@ -46,3 +46,9 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+/var/*
+!/var/cache
+!/var/logs
+!/var/sessions
+!var/SymfonyRequirements.php
