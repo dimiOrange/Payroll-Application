@@ -52,3 +52,6 @@
 !/var/logs
 !/var/sessions
 !var/SymfonyRequirements.php
+
+# IDE Folder
+/.idea/
