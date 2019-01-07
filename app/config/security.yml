@@ -8,26 +8,10 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-
-        in_memory:
-            memory: ~
+        database_employees:
+            entity: { class: AppBundle:Employee, property: email }
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        main:
-            anonymous: ~
-            # activate different ways to authenticate
-
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
-
         secured_area:
             # this firewall applies to all URLs
             pattern: ^/
@@ -53,3 +37,8 @@ security:
                 path: security_logout
                 # The name of the route to redirect to after logging out
                 target: homepage
+
+    access_control:
+        # this is a catch-all for the admin area
+        # additional security lives in the controllers
+#        - { path: '^/(%locale%)/admin', roles: ROLE_ADMIN }
