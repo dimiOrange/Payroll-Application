@@ -14,7 +14,13 @@
         {% endblock %}
     </header>
     <main>
-        {% block main %}<h1>Payroll App</h1>{% endblock %}
+        {% block main %}
+            {% if app.user %}
+                <h1>Welcome</h1>
+            {% else %}
+                <h1>Payroll App</h1>
+            {% endif %}
+        {% endblock %}
     </main>
     <footer>
         {% block footer %}
