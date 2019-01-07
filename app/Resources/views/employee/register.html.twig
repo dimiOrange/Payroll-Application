@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    {% for msg in app.session.flashbag.get('info') %}
+        {{ msg }}
+    {% endfor %}
+    
+    <form method="post">
+        <fieldset>
+            <legend>Employee Register</legend>
+            <p>
+                <label for="employee_fullName">Full Name</label>
+                <input type="text" id="employee_fullName" placeholder="Full Name" name="employee[fullName]" required>
+            </p>
+            <p>
+                <label for="employee_companyId">Company ID</label>
+                <input type="text" id="employee_companyId" placeholder="Company ID" name="employee[companyId]" required>
+            </p>
+            <p>
+                <label for="employee_email">E-Mail</label>
+                <input type="email" id="employee_email" placeholder="E-Mail" name="employee[email]" required>
+            </p>
+            <p>
+                <label for="employee_bankAccount">Bank Account</label>
+                <input type="text" id="employee_bankAccount" placeholder="IBAN" name="employee[bankAccount]" required>
+            </p>
+            <p>
+                <label for="employee_baseSalary">Base Salary</label>
+                <input type="number" id="employee_baseSalary" placeholder="Base Salary" name="employee[baseSalary]" required>
+            </p>
+            <p>
+                <label for="employee_password_first">Password</label>
+                <input type="password" id="employee_password_first" placeholder="Password" name="employee[password][first]" required>
+            </p>
+            <p>
+                <label for="employee_password_second">Confirm Password</label>
+                <input type="password" id="employee_password_second" placeholder="Password" name="employee[password][second]" required>
+            </p>
+            <p>
+                <a href="{{ path('employee_register') }}">Cancel</a>
+                <button type="submit">Submit</button>
+            </p>
+
+            {{  form_row(form._token) }}
+        </fieldset>
+    </form>
+{% endblock %}
+
