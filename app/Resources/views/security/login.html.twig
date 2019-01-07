@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{#{% block body_id 'login' %}#}
+
+{% block main %}
+    <form name="authenticate" action="{{ path('security_login') }}" method="post">
+        <fieldset>
+            <legend>Login</legend>
+            <p>
+                <label for="username">Username</label>
+                <input type="email" id="employee_email" placeholder="Email" name="_username">
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password" name="_password">
+            </p>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <p>
+                <a href="{{ path('homepage') }}">Cancel</a>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </p>
+        </fieldset>
+    </form>
+{% endblock %}
