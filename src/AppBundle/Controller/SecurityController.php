@@ -24,5 +24,4 @@ class SecurityController extends Controller
     public function logout(){
         throw new \Exception("Logout failed!");
     }
-
 }
