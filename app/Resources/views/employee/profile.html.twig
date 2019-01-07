@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div>
+        <p>Welcome, {{ employee.fullName }}</p>
+        <ul>
+            <li>Your Details:</li>
+            <li>Company ID: {{ employee.companyID }}</li>
+            <li>Bank Account: {{ employee.bankAccount }}</li>
+            <li>E-Mail: {{ employee.email }}</li>
+            <li>Base Salary: {{ employee.baseSalary }}</li>
+        </ul>
+    </div>
+{% endblock %}

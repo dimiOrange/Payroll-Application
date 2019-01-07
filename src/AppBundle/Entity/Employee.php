@@ -52,7 +52,7 @@ class Employee
     /**
      * @var string
      *
-     * @ORM\Column(name="baseSalary", type="decimal", precision=2, scale=0)
+     * @ORM\Column(name="baseSalary", type="decimal", precision=0, scale=0)
      */
     private $baseSalary;
 

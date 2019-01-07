@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use SoftUniBlogBundle\Entity\Employee;
+//use AppBundle\Entity\Employee;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
