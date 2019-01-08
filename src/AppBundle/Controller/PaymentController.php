@@ -52,11 +52,50 @@ class PaymentController extends Controller
             ->find($employeeId)
             ->getCompanyID();
 
-        $payments = $this->getDoctrine()
-            ->getRepository(Payment::class)
-            ->findBy(['companyID' => $companyID]);
+        $repository = $this->getDoctrine()
+            ->getRepository(Payment::class);
+
+        $query = $repository->createQueryBuilder('p')
+            ->where('p.companyID = :companyID')
+            ->setParameter('companyID', $companyID)
+            ->orderBy('p.payPeriod', 'DESC')
+            ->getQuery();
+
+        $payments = $query->getResult();
 
         return $this->render("payment/myPaymentsHistory.html.twig",
             ['payments' => $payments]);
+    }
+
+    /**
+     * @Route("/myLastPayment", name="my_last_payment")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function myLastPaymentAction()
+    {
+        $employeeId = $this
+            ->getUser()
+            ->getId();
+
+        $companyID = $this
+            ->getDoctrine()
+            ->getRepository(Employee::class)
+            ->find($employeeId)
+            ->getCompanyID();
+
+        $repository = $this->getDoctrine()
+            ->getRepository(Payment::class);
+
+        $query = $repository->createQueryBuilder('p')
+            ->where('p.companyID = :companyID')
+            ->setParameter('companyID', $companyID)
+            ->orderBy('p.payPeriod', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery();
+
+        $payment = $query->getResult();
+
+        return $this->render("payment/myLastPayment.html.twig",
+            ['payment' => $payment]);
     }
 }

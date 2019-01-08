@@ -2,7 +2,7 @@
 
 {% block main %}
     <div>
-        <h1>My Old Payments</h1>
+        <h1>My Last Payment</h1>
         <table>
             <thead>
             <tr>
@@ -15,19 +15,18 @@
             </tr>
             </thead>
             <tbody>
-            {% for payment in payments %}
+            {% for pay in payment %}
                 <tr>
-                    <td>{{ payment.payPeriod }}</td>
-                    <td>{{ payment.additionalToBaseSalary }}</td>
-                    <td>{{ payment.grossAmount }}</td>
-                    <td>{{ payment.socialSecurityEmployee }}</td>
-                    <td>{{ payment.PIT }}</td>
-                    <td>{{ payment.netSalary }}</td>
+                    <td>{{ pay.payPeriod }}</td>
+                    <td>{{ pay.additionalToBaseSalary }}</td>
+                    <td>{{ pay.grossAmount }}</td>
+                    <td>{{ pay.socialSecurityEmployee }}</td>
+                    <td>{{ pay.PIT }}</td>
+                    <td>{{ pay.netSalary }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-
 {% endblock %}
 
