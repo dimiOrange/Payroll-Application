@@ -2,27 +2,37 @@
 
 {% block main %}
     <div>
-        <h1>My Old Payments</h1>
+        <h1>All Payments Review</h1>
         <table>
             <thead>
             <tr>
                 <th>Period</th>
+                {#<th>Name</th>#}
+                <th>Company ID</th>
+                {#<th>Bank Account</th>#}
+                {#<th>Base Salary</th>#}
                 <th>Additional To Base</th>
                 <th>Gross</th>
-                <th>Soc. Sec.</th>
+                <th>Soc. Sec. Employee</th>
                 <th>PIT</th>
                 <th>Net</th>
+                <th>Soc. Sec. Employer</th>
             </tr>
             </thead>
             <tbody>
             {% for payment in payments %}
                 <tr>
                     <td>{{ payment.payPeriod }}</td>
+                    {#<td>{{ employee.fullName }}</td>#}
+                    <td>{{ payment.companyID }}</td>
+                    {#<td>{{ employee.bankAccount }}</td>#}
+                    {#<td>{{ employee.baseSalary }}</td>#}
                     <td>{{ payment.additionalToBaseSalary }}</td>
                     <td>{{ payment.grossAmount }}</td>
                     <td>{{ payment.socialSecurityEmployee }}</td>
                     <td>{{ payment.PIT }}</td>
                     <td>{{ payment.netSalary }}</td>
+                    <td>{{ payment.socialSecurityEmployer }}</td>
                 </tr>
             {% endfor %}
             </tbody>

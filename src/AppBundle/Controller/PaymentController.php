@@ -59,6 +59,7 @@ class PaymentController extends Controller
             ->where('p.companyID = :companyID')
             ->setParameter('companyID', $companyID)
             ->orderBy('p.payPeriod', 'DESC')
+            ->setFirstResult( 1 )
             ->getQuery();
 
         $payments = $query->getResult();
@@ -97,5 +98,26 @@ class PaymentController extends Controller
 
         return $this->render("payment/myLastPayment.html.twig",
             ['payment' => $payment]);
+    }
+
+    /**
+     * @Route("/allPayments", name="all_payments")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function allPaymentsAction()
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository(Payment::class);
+
+        $query = $repository->createQueryBuilder('p')
+            ->addOrderBy('p.payPeriod', 'DESC')
+            ->addOrderBy('p.companyID', 'ASC')
+            ->getQuery();
+
+        $payments = $query->getResult();
+
+        return $this->render("payment/allPayments.html.twig", [
+            'payments' => $payments,
+        ]);
     }
 }
