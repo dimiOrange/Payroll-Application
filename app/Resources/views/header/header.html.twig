@@ -1,23 +1,25 @@
 <p>Payroll App</p>
 <ul>
-    {% if app.user %}
-        {#<li>#}
-            {#<a href="{{ path('employee_register') }}">#}
-                {#Register Employee#}
-            {#</a>#}
-        {#</li>#}
-
-        {#<li>#}
-            {#<a href="{{ path('all_payments') }}">#}
-                {#Payments Report#}
-            {#</a>#}
-        {#</li>#}
-        {#<li>#}
-            {#<a href="{{ path('add_payment') }}">#}
-                {#Add Payment#}
-            {#</a>#}
-        {#</li>#}
-
+    {% if app.getUser() %}
+        {% if app.getUser().isPersonnelManager() %}
+            <li>
+                <a href="{{ path('employee_register') }}">
+                    Register Employee
+                </a>
+            </li>
+        {% endif %}
+        {% if app.getUser().isFinancialManager() %}
+            <li>
+                <a href="{{ path('add_payment') }}">
+                    Add Payment
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('all_payments') }}">
+                    Payments Report
+                </a>
+            </li>
+        {% endif %}
         <li>
             <a href="{{ path('employee_profile') }}">
                 My Profile

@@ -249,6 +249,20 @@ class Employee implements UserInterface
         return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function isPersonnelManager(){
+        return in_array("ROLE_PERSONNEL_MANAGER", $this->getRoles());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFinancialManager(){
+        return in_array("ROLE_FINANCIAL_MANAGER", $this->getRoles());
+    }
+
 
     /**
      * Returns the salt that was originally used to encode the password.
