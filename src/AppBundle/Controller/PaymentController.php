@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Employee;
 use AppBundle\Entity\Payment;
 use AppBundle\Form\PaymentType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +17,7 @@ class PaymentController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function registerAction(Request $request)
+    public function addPaymentAction(Request $request)
     {
         $payment = new Payment();
         $form = $this->createForm(PaymentType::class, $payment);
@@ -32,5 +34,29 @@ class PaymentController extends Controller
 
         return $this->render('payment/addPayment.html.twig',
             ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/myPaymentsHistory", name="my_payments_history")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function myPaymentHistoryAction()
+    {
+        $employeeId = $this
+            ->getUser()
+            ->getId();
+
+        $companyID = $this
+            ->getDoctrine()
+            ->getRepository(Employee::class)
+            ->find($employeeId)
+            ->getCompanyID();
+
+        $payments = $this->getDoctrine()
+            ->getRepository(Payment::class)
+            ->findBy(['companyID' => $companyID]);
+
+        return $this->render("payment/myPaymentsHistory.html.twig",
+            ['payments' => $payments]);
     }
 }
