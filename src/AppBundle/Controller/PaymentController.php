@@ -116,6 +116,8 @@ class PaymentController extends Controller
 
         $payments = $query->getResult();
 
+
+
         return $this->render("payment/allPayments.html.twig", [
             'payments' => $payments,
         ]);
