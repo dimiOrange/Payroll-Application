@@ -19,6 +19,12 @@ class PaymentController extends Controller
      */
     public function addPaymentAction(Request $request)
     {
+        $currEmployee = $this->getUser();
+
+        if ($currEmployee === null || !$currEmployee->isFinancialManager() ) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $payment = new Payment();
         $form = $this->createForm(PaymentType::class, $payment);
         $form->handleRequest($request);
@@ -106,6 +112,12 @@ class PaymentController extends Controller
      */
     public function allPaymentsAction()
     {
+        $currEmployee = $this->getUser();
+
+        if ($currEmployee === null || !$currEmployee->isFinancialManager() ) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $repository = $this->getDoctrine()
             ->getRepository(Payment::class);
 

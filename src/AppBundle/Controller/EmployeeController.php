@@ -18,6 +18,11 @@ class EmployeeController extends Controller
      */
     public function registerAction(Request $request)
     {
+        $currEmployee = $this->getUser();
+        if ($currEmployee === null || !$currEmployee->isPersonnelManager() ) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $employee = new Employee();
         $form = $this->createForm(EmployeeType::class, $employee);
         $form->handleRequest($request);
@@ -50,8 +55,8 @@ class EmployeeController extends Controller
             $em->persist($employee);
             $em->flush();
 
-            $this->addFlash('info', "Employee successfully registered");
-            return $this->redirectToRoute("security_login");
+            $this->addFlash('info', "Employee " . $employee->getUsername() . " was successfully registered");
+            return $this->redirectToRoute('employee_register');
         }
 
         return $this->render('employee/register.html.twig',
