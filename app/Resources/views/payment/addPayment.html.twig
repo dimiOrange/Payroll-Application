@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    {% for msg in app.session.flashbag.get('info') %}
+        {{ msg }}
+    {% endfor %}
+
+    <form method="post">
+        <fieldset>
+            <legend>Add Payment</legend>
+            <p>
+                <label for="payment_companyId">Employee's Company ID</label>
+                <input type="text" id="payment_companyId" placeholder="Company ID" name="payment[companyID]" required>
+            </p>
+            <p>
+                <label for="payment_payPeriod">Payment Period</label>
+                <input type="text" id="payment_payPeriod" placeholder="Payment Period" name="payment[payPeriod]" required>
+            </p>
+            <p>
+                <label for="payment_additionalToBaseSalary">Additional To Base Salary</label>
+                <input type="number" id="payment_additionalToBaseSalary" placeholder="Additional Amount" name="payment[additionalToBaseSalary]" required>
+            </p>
+            <p>
+                <label for="payment_grossAmount">Gross Amount</label>
+                <input type="number" id="payment_grossAmount" placeholder="Gross Amount" name="payment[grossAmount]" required>
+            </p>
+            <p>
+                <label for="payment_socialSecurityEmployee">Social Security Employee</label>
+                <input type="number" id="payment_socialSecurityEmployee" placeholder="Social Security Employee" name="payment[socialSecurityEmployee]" required>
+            </p>
+            <p>
+                <label for="payment_pit">PIT</label>
+                <input type="number" id="payment_pit" placeholder="PIT" name="payment[pit]" required>
+            </p>
+            <p>
+                <label for="payment_netPay">Net Pay</label>
+                <input type="number" id="payment_netPay" placeholder="Net Pay" name="payment[netSalary]" required>
+            </p>
+            <p>
+                <label for="payment_socialSecurityEmployer">Social Security Employer</label>
+                <input type="number" id="payment_socialSecurityEmployer" placeholder="Social Security Employer" name="payment[socialSecurityEmployer]" required>
+            </p>
+            <p>
+                <a href="{{ path('employee_register') }}">Cancel</a>
+                <button type="submit">Submit</button>
+            </p>
+
+            {{  form_row(form._token) }}
+        </fieldset>
+    </form>
+{% endblock %}

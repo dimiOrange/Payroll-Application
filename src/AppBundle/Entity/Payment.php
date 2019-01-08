@@ -29,6 +29,22 @@ class Payment
     private $payPeriod;
 
     /**
+     * @return string
+     */
+    public function getCompanyID()
+    {
+        return $this->companyID;
+    }
+
+    /**
+     * @param string $companyID
+     */
+    public function setCompanyID($companyID)
+    {
+        $this->companyID = $companyID;
+    }
+
+    /**
      * @var string
      *
      * @ORM\Column(name="companyID", type="string", length=255)
