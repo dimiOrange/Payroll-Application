@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Role;
 use AppBundle\Entity\Employee;
 use AppBundle\Form\EmployeeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,12 +37,12 @@ class EmployeeController extends Controller
             $password = $this->get('security.password_encoder')
                 ->encodePassword($employee, $employee->getPassword());
 
-//            $role = $this
-//                ->getDoctrine()
-//                ->getRepository(Role::class)
-//                ->findOneBy(['name' => 'ROLE_USER']);
-//
-//            $user->addRole($role);
+            $role = $this
+                ->getDoctrine()
+                ->getRepository(Role::class)
+                ->findOneBy(['name' => 'ROLE_EMPLOYEE']);
+
+            $employee->addRole($role);
 
             $employee->setPassword($password);
 

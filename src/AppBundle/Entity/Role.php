@@ -2,12 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Role
  *
- * @ORM\Table(name="role")
+ * @ORM\Table(name="roles")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RoleRepository")
  */
 class Role
@@ -27,6 +28,19 @@ class Role
      * @ORM\Column(name="name", type="string", length=100, unique=true)
      */
     private $name;
+
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Employee", mappedBy="roles")
+     */
+    private $employees;
+
+    public function __construct()
+    {
+        $this->employees = new ArrayCollection();
+    }
 
 
     /**
@@ -61,6 +75,10 @@ class Role
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getRole(){
+        return $this->getName();
     }
 }
 

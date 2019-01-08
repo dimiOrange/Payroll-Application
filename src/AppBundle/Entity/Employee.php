@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 /**
@@ -54,6 +55,27 @@ class Employee implements UserInterface
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
+
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role")
+     *
+     * @ORM\JoinTable(name="employees_roles",
+     *     joinColumns={@ORM\JoinColumn(name="employee_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     *   )
+     */
+    private $roles;
+
+
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
+
+
     /**
      * Get id
      *
@@ -189,6 +211,7 @@ class Employee implements UserInterface
     {
         return $this->password;
     }
+
     /**
      * Returns the roles granted to the user.
      *
@@ -205,8 +228,28 @@ class Employee implements UserInterface
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $stringRoles = [];
+
+        foreach ($this->roles as $role){
+            /** @var Role $role */
+            $stringRoles[] = $role->getRole();
+        }
+
+        return $stringRoles;
     }
+
+    /**
+     * @param \AppBundle\Entity\Role $role
+     *
+     * @return Employee
+     */
+    public function addRole(Role $role)
+    {
+        $this->roles[]= $role;
+        return $this;
+    }
+
+
     /**
      * Returns the salt that was originally used to encode the password.
      *
