@@ -1,10 +1,7 @@
 <?php
-
 namespace AppBundle\Entity;
-
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Employee
  *
@@ -21,50 +18,42 @@ class Employee implements UserInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="companyID", type="string", length=100, unique=true)
      */
     private $companyID;
-
     /**
      * @var string
      *
      * @ORM\Column(name="fullName", type="string", length=255)
      */
     private $fullName;
-
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=100, unique=true)
      */
     private $email;
-
     /**
      * @var string
      *
      * @ORM\Column(name="bankAccount", type="string", length=30, unique=true)
      */
     private $bankAccount;
-
     /**
      * @var string
      *
      * @ORM\Column(name="baseSalary", type="decimal", precision=0, scale=0)
      */
     private $baseSalary;
-
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
-
-
     /**
      * Get id
      *
@@ -74,7 +63,6 @@ class Employee implements UserInterface
     {
         return $this->id;
     }
-
     /**
      * Set companyID
      *
@@ -85,10 +73,8 @@ class Employee implements UserInterface
     public function setCompanyID($companyID)
     {
         $this->companyID = $companyID;
-
         return $this;
     }
-
     /**
      * Get companyID
      *
@@ -98,7 +84,6 @@ class Employee implements UserInterface
     {
         return $this->companyID;
     }
-
     /**
      * Set fullName
      *
@@ -109,10 +94,8 @@ class Employee implements UserInterface
     public function setFullName($fullName)
     {
         $this->fullName = $fullName;
-
         return $this;
     }
-
     /**
      * Get fullName
      *
@@ -122,7 +105,6 @@ class Employee implements UserInterface
     {
         return $this->fullName;
     }
-
     /**
      * Set email
      *
@@ -133,10 +115,8 @@ class Employee implements UserInterface
     public function setEmail($email)
     {
         $this->email = $email;
-
         return $this;
     }
-
     /**
      * Get email
      *
@@ -146,7 +126,6 @@ class Employee implements UserInterface
     {
         return $this->email;
     }
-
     /**
      * Set bankAccount
      *
@@ -157,10 +136,8 @@ class Employee implements UserInterface
     public function setBankAccount($bankAccount)
     {
         $this->bankAccount = $bankAccount;
-
         return $this;
     }
-
     /**
      * Get bankAccount
      *
@@ -170,7 +147,6 @@ class Employee implements UserInterface
     {
         return $this->bankAccount;
     }
-
     /**
      * Set baseSalary
      *
@@ -181,10 +157,8 @@ class Employee implements UserInterface
     public function setBaseSalary($baseSalary)
     {
         $this->baseSalary = $baseSalary;
-
         return $this;
     }
-
     /**
      * Get baseSalary
      *
@@ -194,7 +168,6 @@ class Employee implements UserInterface
     {
         return $this->baseSalary;
     }
-
     /**
      * Set password
      *
@@ -205,10 +178,8 @@ class Employee implements UserInterface
     public function setPassword($password)
     {
         $this->password = $password;
-
         return $this;
     }
-
     /**
      * Get password
      *
@@ -218,7 +189,6 @@ class Employee implements UserInterface
     {
         return $this->password;
     }
-
     /**
      * Returns the roles granted to the user.
      *
@@ -237,7 +207,6 @@ class Employee implements UserInterface
     {
         return array('ROLE_USER');
     }
-
     /**
      * Returns the salt that was originally used to encode the password.
      *
@@ -249,7 +218,6 @@ class Employee implements UserInterface
     {
         // TODO: Implement getSalt() method.
     }
-
     /**
      * Returns the username used to authenticate the user.
      *
@@ -259,7 +227,6 @@ class Employee implements UserInterface
     {
         return $this->email;
     }
-
     /**
      * Removes sensitive data from the user.
      *
