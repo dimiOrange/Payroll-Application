@@ -100,10 +100,10 @@ class EmployeeController extends Controller
             ->getRepository(Employee::class)
             ->find($employeeId);
 
-        $defaultData = array('pass' => 'New Password', 'repeatPass' => 'Repeat New Password');
+        $defaultData = array('pass' => ' Set New Password', 'repeatPass' => ' Repeat New Password');
         $form = $this->createFormBuilder($defaultData)
-            ->add('pass', PasswordType::class, array('label' => 'New Password'))
-            ->add('repeatPass', PasswordType::class, array('label' => 'Repeat New Password'))
+            ->add('pass', TextType::class, array('label' => 'New Password:'))
+            ->add('repeatPass', TextType::class, array('label' => 'Repeat New Password:'))
             ->add('send', SubmitType::class)
             ->getForm();
 
@@ -151,9 +151,9 @@ class EmployeeController extends Controller
             return $this->redirectToRoute('homepage');
         }
         
-        $defaultData = array('companyID' => 'Company ID No');
+        $defaultData = array('companyID' => ' Company ID No');
         $form = $this->createFormBuilder($defaultData)
-            ->add('companyID', TextType::class, array('label' => 'Company ID No'))
+            ->add('companyID', TextType::class, array('label' => 'Company ID No:'))
             ->add('send', SubmitType::class)
             ->getForm();
 

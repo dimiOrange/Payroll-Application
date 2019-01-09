@@ -86,6 +86,28 @@ form p {
     width: 100%;
 }
 
+#change-password-form div,
+#find-employee-form div {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+label {
+    display: inline-block;
+    width: 49%;
+    text-align: right;
+}
+
+input {
+    display: inline-block;
+    width: 49%;
+    border: none;
+}
+
+input:focus {
+    border-color: #F0810F;
+}
+
 /* Class Messages */
 .msg {
     color: #7D4427;
