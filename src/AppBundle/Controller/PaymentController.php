@@ -35,7 +35,8 @@ class PaymentController extends Controller
             $em->flush();
 
             $this->addFlash('info', "Payment Added");
-            return $this->redirectToRoute("security_login");
+            return $this->render('payment/addPayment.html.twig',
+                ['form' => $form->createView()]);
         }
 
         return $this->render('payment/addPayment.html.twig',

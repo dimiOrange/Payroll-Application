@@ -6,6 +6,7 @@ use AppBundle\Entity\Role;
 use AppBundle\Entity\Employee;
 use AppBundle\Form\EmployeeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +58,7 @@ class EmployeeController extends Controller
             $em->persist($employee);
             $em->flush();
 
-            $this->addFlash('info', "Employee " . $employee->getUsername() . " was successfully registered");
+            $this->addFlash('info', "Employee " . $employee->getFullName() . " was successfully registered");
             return $this->redirectToRoute('employee_register');
         }
 
@@ -101,8 +102,8 @@ class EmployeeController extends Controller
 
         $defaultData = array('pass' => 'New Password', 'repeatPass' => 'Repeat New Password');
         $form = $this->createFormBuilder($defaultData)
-            ->add('pass', TextType::class, array('label' => 'New Password'))
-            ->add('repeatPass', TextType::class, array('label' => 'Repeat New Password'))
+            ->add('pass', PasswordType::class, array('label' => 'New Password'))
+            ->add('repeatPass', PasswordType::class, array('label' => 'Repeat New Password'))
             ->add('send', SubmitType::class)
             ->getForm();
 
@@ -127,7 +128,10 @@ class EmployeeController extends Controller
             $employee->setPassword($password);
             $entityManager->flush();
 
-            return $this->redirectToRoute('homepage');
+            $this->addFlash('info', "Password changed.");
+            return $this->render('employee/changePassword.html.twig', array(
+                'form' => $form->createView(),
+            ));
         }
 
         return $this->render('employee/changePassword.html.twig', array(

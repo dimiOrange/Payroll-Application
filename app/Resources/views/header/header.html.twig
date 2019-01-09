@@ -2,19 +2,14 @@
 <ul>
     {% if app.getUser() %}
         {% if app.getUser().isPersonnelManager() %}
-            {#<li>#}
-                {#<a href="{{ path('employee_register') }}">#}
-                    {#Management#}
-                {#</a>#}
-            {#</li>#}
-            {#<li>#}
-                {#<a href="{{ path('employee_register') }}">#}
-                    {#Profile#}
-                {#</a>#}
-            {#</li>#}
             <li>
                 <a href="{{ path('employee_register') }}">
                     Register Employee
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('find_employee') }}">
+                    Find Employee
                 </a>
             </li>
         {% endif %}
