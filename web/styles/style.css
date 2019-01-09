@@ -58,8 +58,11 @@ main {
     justify-content: center;
     align-items: center;
     height: 100%;
+    overflow: auto;
 }
 
+/* Class main-inner */
+.main-inner,
 form {
     width: 50%;
 }
