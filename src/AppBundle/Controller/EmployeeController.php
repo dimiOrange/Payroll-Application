@@ -134,4 +134,42 @@ class EmployeeController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @Route("/findEmployee", name="find_employee")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function findEmployeeAction(Request $request)
+    {
+        $currEmployee = $this->getUser();
+        if ($currEmployee === null || !$currEmployee->isPersonnelManager()) {
+            return $this->redirectToRoute('homepage');
+        }
+        
+        $defaultData = array('companyID' => 'Company ID No');
+        $form = $this->createFormBuilder($defaultData)
+            ->add('companyID', TextType::class, array('label' => 'Company ID No'))
+            ->add('send', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $companyID = $data['companyID'];
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $employee = $entityManager
+                ->getRepository(Employee::class)
+                ->findOneBy(array('companyID' => $companyID));
+
+            return $this->render("employee/viewEmployeeDetails.html.twig",
+                ['employee' => $employee, 'form' => $form->createView()]);
+        }
+
+        return $this->render('employee/findEmployee.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <form method="post">
+        <fieldset>
+            <legend>Find Employee</legend>
+            <p>{{ form_start(form) }}</p>
+            <p>{{ form_widget(form) }}</p>
+            <p>{{ form_end(form) }}</p>
+        </fieldset>
+    </form>
+{% endblock %}
+
