@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <div></div>
+    <div>
     {% for msg in app.session.flashbag.get('info') %}
-        <p>{{ msg }}</p>
+        <p class="msg">{{ msg }}</p>
     {% endfor %}
 
-    <form method="post">
+    <form class="inner-form" method="post">
         <fieldset>
             <legend>Employee Register</legend>
             <p>
@@ -45,5 +45,6 @@
             {{  form_row(form._token) }}
         </fieldset>
     </form>
+    </div>
 {% endblock %}
 
