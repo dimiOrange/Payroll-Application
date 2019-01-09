@@ -2,6 +2,16 @@
 <ul>
     {% if app.getUser() %}
         {% if app.getUser().isPersonnelManager() %}
+            {#<li>#}
+                {#<a href="{{ path('employee_register') }}">#}
+                    {#Management#}
+                {#</a>#}
+            {#</li>#}
+            {#<li>#}
+                {#<a href="{{ path('employee_register') }}">#}
+                    {#Profile#}
+                {#</a>#}
+            {#</li>#}
             <li>
                 <a href="{{ path('employee_register') }}">
                     Register Employee
@@ -23,6 +33,11 @@
         <li>
             <a href="{{ path('employee_profile') }}">
                 My Profile
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('employee_change_password') }}">
+                Change Password
             </a>
         </li>
         <li>
